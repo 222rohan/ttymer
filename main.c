@@ -39,24 +39,23 @@ int main(int argc, char *argv[])
         ch = getch();
 
         switch (ch) {
-            case SW_KEY_QUIT:
-                tui_running = false; 
-                break;
+        case SW_KEY_QUIT:
+            tui_running = false; 
+            break;
 
-            case SW_KEY_RESET:
-                sw_reset(&sw);
-                break;
+        case SW_KEY_RESET:
+            sw_reset(&sw);
+            break;
 
-            case SW_KEY_TOGGLE_STATE:
-                sw_getstate(&sw) == TTYMER_RUNNING ?
-                    sw_stop(&sw) :
-                    sw_start(&sw);
-                break;
-        
-            // TODO: add laps
-
-            default: 
-                // do nothing
+        case SW_KEY_TOGGLE_STATE:
+            sw_getstate(&sw) == TTYMER_RUNNING ?
+                sw_stop(&sw) :
+                sw_start(&sw);
+            break;
+    
+        // TODO: add laps
+        default: 
+            // do nothing
         }
 
         clear();

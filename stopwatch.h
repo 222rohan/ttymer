@@ -8,24 +8,19 @@
  *
  */
 
+#ifndef STOPWATCH_H
+#define STOPWATCH_H
 /*
  * includes
  */
-#include <stdint.h>
-#include <assert.h>
-#include <time.h>
-#include <sys/time.h>
+#include "ttymer.h"
 
 /*
  * Stopwatch Variables
  * 
  */
-enum SW_VARS
-{
+enum SW_VARS {
     SW_PREC_MILLI = 1000,
-    // TODO: move this to a separate file
-    TTYMER_STOPPED,
-    TTYMER_RUNNING,
 
     SW_KEY_QUIT = 'q',
     SW_KEY_RESET = 'r',
@@ -36,14 +31,17 @@ enum SW_VARS
 /*
  * Stopwatch struct
  */
-struct stopwatch 
-{
+struct stopwatch {
     uint64_t start_time;
     uint64_t stopped_time;
     uint64_t elapsed_time;
-    
     int32_t state;
-    int32_t precision;
+    /*
+     * Not sure if this will ever 
+     * be used, but maybe in the 
+     * future..
+     */
+    // int32_t precision;
 };
 
 /*
@@ -59,3 +57,5 @@ void sw_stop(struct stopwatch *sw);
  */
 uint64_t sw_gettime(struct stopwatch *sw);
 int32_t sw_getstate(struct stopwatch *sw);
+
+#endif

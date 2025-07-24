@@ -7,10 +7,7 @@
  *
  */
 
-// TODO: add ifndefs both here and there
 #include "stopwatch.h"
-
-static int64_t get_currenttime();
 
 // (re)initialises the stopwatch
 void sw_reset(struct stopwatch *sw)
@@ -20,11 +17,6 @@ void sw_reset(struct stopwatch *sw)
     sw->start_time = 0; // this stores the last start point (from sw_gettime, sw_stop). Not the original.
     sw->stopped_time = 0;
     sw->elapsed_time = 0;
-   /* FIXME: temporarily setting milli prec,
-     * once options are added will fix 
-     * this.
-     */
-    sw->precision = SW_PREC_MILLI; 
 }
 
 // starts running the stopwatch
@@ -54,7 +46,6 @@ void sw_stop(struct stopwatch *sw)
 }
 
 // Returns the time elapsed in the stopwatch
-// FIXME: this is completely wrong
 uint64_t sw_gettime(struct stopwatch *sw)
 {
     if (sw->state == TTYMER_RUNNING) {
@@ -69,14 +60,4 @@ uint64_t sw_gettime(struct stopwatch *sw)
 int32_t sw_getstate(struct stopwatch *sw)
 {
     return sw->state;
-}
-
-static int64_t get_currenttime()
-{
-    struct timespec ts;
-
-    if (clock_gettime(CLOCK_MONOTONIC, &ts) == 0)
-        return (uint64_t)(ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
-    else 
-        return 0;
 }
