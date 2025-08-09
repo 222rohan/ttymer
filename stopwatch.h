@@ -5,7 +5,6 @@
  * Contains the declarations, enums
  * and constants needed for 
  * the stopwatch
- *
  */
 
 #ifndef STOPWATCH_H
